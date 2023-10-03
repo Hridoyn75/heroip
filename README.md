@@ -1,7 +1,7 @@
 
 # Introduction
 
-**hridoy-ip** is a lightweight Node.js utility designed to simplify the process of IP address detection and geolocation within your applications. It seamlessly integrates the capabilities of two widely-used packages, `request-ip` and `geoip-lite`, to provide a straightforward solution for obtaining both IP addresses and geolocation details.
+**hridoy-ip** is a lightweight Node.js middleware and utility package that simplifies IP address lookup and geolocation based on incoming requests. This package is designed to seamlessly integrate into your Node.js applications to provide essential IP address information effortlessly.
 ## Installation
 
 Installing **hridoy-ip** is straightforward. You can add it to your Node.js project using npm, the package manager for Node.js:
@@ -10,90 +10,52 @@ Installing **hridoy-ip** is straightforward. You can add it to your Node.js proj
   npm install hridoy-ip
 ```
     
-## Usage
+## Usage / Example
 
-**hridoy-ip** simplifies the process of IP address detection and geolocation in your Express.js applications. It offers three main functions: `ip`, `lookup`, and `get`. Below, you'll find explanations and examples for each of these functions.
+**hridoy-ip** simplifies the process of IP address detection and geolocation in your Express.js applications. 
 
 ```javascript
-const hridoyIp = require('hridoy-ip');
-const express = require('express');
-const app = express();
+import express from "express";
+import hridoyIp, { lookup } from "hridoy-ip";
 
-// Route to extract and respond with the client's IP address
-app.get('/', (req, res) => {
-  const ipAddress = hridoyIp.ip(req);
-  res.json({ 'ipAddress': ipAddress });
+const app = express(); // Create an Express app
+
+app.use(hridoyIp); // Use hridoyIp middleware for IP info
+
+app.get("/", (req, res) => {
+  const { ipInfo } = req; // Access IP information from the request object
+  res.json(ipInfo); // Respond with IP details as JSON
 });
 
-// Geolocation lookup for a specific IP address (replace with desired IP)
-const ipAddress = '8.8.8.8'; 
-const details = hridoyIp.lookup(ipAddress);
-
-console.log('Geolocation Details:', details);
-
-// Route to retrieve both IP address and geolocation details
-app.get('/all', (req, res) => {
-  const result = hridoyIp.get(req);
-  res.json(result);
+const port = process.env.PORT || 3000; // Set the server port
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`); // Start the server
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+const ipAddress = "8.8.8.8"; // IP address to look up
+const ipDetails = lookup(ipAddress); // Use lookup function to get IP details
+
+console.log(ipDetails); // Log the IP details
+
 
 ```
-## API Documentation
-
-**hridoy-ip** offers a simple and intuitive API for IP address detection and geolocation in your Node.js applications. This section provides detailed documentation for each of the package's functions.
-
-### 1. `ip(req)`
-
-The `ip` function extracts the client's IP address from the Express.js request object (`req`).
-
-#### Parameters:
-
-- `req` (Request Object): The Express.js request object.
-
-#### Returns:
-
-- `String`: The client's IP address.
-
-
-### 2. `lookup(ipAddress)`
-
-The `lookup` function performs geolocation lookup for a given IP address and returns geolocation details.
-
-#### Parameters:
-
-- `ipAddress` (String): The IP address you want to look up.
-
-#### Returns:
-
-- `Object`: An object containing geolocation details, including latitude, longitude, city, region, country, and more.
-
-### 3. `get(req)`
-
-The `get` function combines IP address detection and geolocation lookup, providing an object with both the IP address and geolocation details.
-
-#### Parameters:
-
-- `req` (Request Object): The Express.js request object.
-
-#### Returns
-
-The `get` function returns an object with two properties:
-
-- `ip` (String): The client's IP address.
-- `details` (Object): Geolocation details as returned by the `lookup` function.
 ## Why Use hridoy-ip?
 
-- **Effortless IP Detection**: Retrieve the client's IP address with ease using the `ip` function. No need to write complex code to extract this fundamental piece of information.
+The `hridoy-ip` package offers several compelling reasons to simplify IP address lookup and geolocation in your Node.js applications:
 
-- **Geolocation Made Simple**: With the `lookup` function, effortlessly gather geolocation details for an IP address. No need to navigate complex APIs or databases; hridoy-ip handles it for you.
+1. **Ease of Use**: With just a few lines of code, you can effortlessly retrieve detailed information about incoming IP addresses. The `hridoyIp` middleware seamlessly integrates into your Express.js applications, making IP data readily available.
 
-- **Convenience**: The `get` function combines IP address detection and geolocation lookup, offering a convenient way to obtain both pieces of information in a single call.
+2. **Improved Functionality**: By gaining access to the IP details of incoming requests, you can enhance your application's functionality. This can include personalizing content, enhancing security measures, or building analytics features.
 
-- **Node.js Compatibility**: Designed specifically for Node.js, hridoy-ip seamlessly integrates into your Node.js applications.
+3. **Flexibility**: The package provides both middleware and a standalone `lookup` function, allowing you to choose the approach that best suits your application's needs. Use the middleware to automatically populate IP information in your request objects or manually look up IP details when required.
+
+4. **Underlying Libraries**: `hridoy-ip` leverages well-established libraries such as `request-ip` and `geoip-lite` to ensure accuracy and reliability in IP address handling and geolocation.
+
+5. **Open Source**: This package is open-source and available under the MIT License, making it freely accessible and customizable for your projects.
+
+Whether you're building a location-based service, enhancing user experiences, or adding security layers, `hridoy-ip` simplifies the process of working with IP addresses, enabling you to focus on your application's core functionality.
+
+Explore the documentation for detailed usage instructions and leverage `hridoy-ip` to unlock the potential of IP address data in your Node.js applications.
 ## Acknowledgments
 
 We would like to express our gratitude to the creators and maintainers of the following packages and resources that have contributed to the functionality and capabilities of **hridoy-ip**:
