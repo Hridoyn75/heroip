@@ -1,14 +1,14 @@
 {
-  "name": "hridoy-ip",
-  "version": "2.0.1",
-  "description": "hridoy-ip: A Node.js utility for seamless IP address detection and geolocation. Easily retrieve the client's IP address and gather geolocation details, all in one package. Simplify IP-based operations in your applications with hridoy-ip.",
+  "name": "heroip",
+  "version": "1.0.0",
+  "description": "heroip: A Node.js utility for seamless IP address detection and geolocation. Easily retrieve the client's IP address and gather geolocation details, all in one package. Simplify IP-based operations in your applications with heroip.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Hridoy ip",
+    "heroip",
     "IP address",
     "Request IP",
     "GeoIP",
@@ -33,6 +33,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hridoyn75/hridoy-ip.git"
+    "url": "https://github.com/Hridoyn75/heroip.git"
   }
 }
