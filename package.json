@@ -1,9 +1,8 @@
 {
   "name": "heroip",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "heroip: A Node.js utility for seamless IP address detection and geolocation. Easily retrieve the client's IP address and gather geolocation details, all in one package. Simplify IP-based operations in your applications with heroip.",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +23,7 @@
     "Internet",
     "Location data",
     "Geographical information"
-  ],  
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {

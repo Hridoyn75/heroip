@@ -1,20 +1,34 @@
-import requestIp from "request-ip";
-import geoip from "geoip-lite";
+const requestIp = require("request-ip");
+const geoip = require("geoip-lite");
 
-export const lookup = (ipAddress) => {
-  if (!ipAddress)
-    return console.error(
-      "@heroip Error: lookup fuction required parameter of ip address"
-    );
+const lookup = (ipAddress) => {
+  if (!ipAddress) {
+    return null; 
+  }
   return geoip.lookup(ipAddress);
 };
 
+
+
 const heroip = (req, res, next) => {
-  req.ipInfo = {
-    ip: requestIp.getClientIp(req),
-    details: geoip.lookup(requestIp.getClientIp(req)),
-  };
+  const clientIp = requestIp.getClientIp(req);
+  const ipDetails = geoip.lookup(clientIp);
+
+  if (!ipDetails) {
+    // Handle the case where geoip.lookup returns null (no data found)
+    req.ipInfo = {
+      ip: clientIp,
+      details: null,
+    };
+  } else {
+    req.ipInfo = {
+      ip: clientIp,
+      details: ipDetails,
+    };
+  }
+
   next();
 };
 
-export default heroip;
+module.exports = heroip; 
+module.exports.lookup = lookup;
